@@ -7,7 +7,7 @@ var World = Psykick2D.World,
 
 // Initialize the world
 World.init({
-  width: 350,
+  width: 400,
   height: 500,
   backgroundColor: '#000',
   preload: {
@@ -27,7 +27,7 @@ var spriteSystem = new SpriteSystem(),
     controlSystem = new PlayerControl();
 
 // Give the player some controls and draw them
-var player = Factory.createPlayer(161, 480);
+var player = Factory.createPlayer(186, 480);
 controlSystem.player = player;
 spriteSystem.addEntity(player);
 

@@ -6,7 +6,7 @@ var World = Psykick2D.World,
 
 // Initialize the world
 World.init({
-  width: 350,
+  width: 400,
   height: 500,
   backgroundColor: '#000',
   preload: {
@@ -25,7 +25,7 @@ var mainLayer = World.createLayer(),
     spriteSystem = new SpriteSystem();
 
 // Prepare to draw the player and some enemies
-spriteSystem.addEntity(Factory.createPlayer(161, 480));
+spriteSystem.addEntity(Factory.createPlayer(186, 480));
 spriteSystem.addEntity(Factory.createOrangeEnemy(20, 20));
 spriteSystem.addEntity(Factory.createPurpleEnemy(100, 20));
 spriteSystem.addEntity(Factory.createBlueEnemy(180, 20));
