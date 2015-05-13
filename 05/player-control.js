@@ -5,6 +5,8 @@
       BehaviorSystem = Psykick2D.BehaviorSystem,
       Factory = Game.Factory,
 
+      MIN_X = 15,
+      MAX_X = 340,
       BULLET_SPEED = 250,
       SPEED = 100; // Tweak to adjust the players movement speed
 
@@ -38,6 +40,12 @@
 
     // Change the sprites position
     player.x += velocity;
+
+    if (player.x < MIN_X) {
+      player.x = MIN_X;
+    } else if (player.x > MAX_X) {
+      player.x = MAX_X;
+    }
 
     // Shoot a bullet
     if (bullet.y <= -bullet.height && Keyboard.isKeyDown(Keys.Space)) {

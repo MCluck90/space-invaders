@@ -4,6 +4,8 @@
       Keys = Psykick2D.Keys,
       BehaviorSystem = Psykick2D.BehaviorSystem,
 
+      MIN_X = 15,
+      MAX_X = 340,
       SPEED = 100; // Tweak to adjust the players movement speed
 
   /**
@@ -33,7 +35,14 @@
     }
 
     // Change the sprites position
-    this.player.getComponent('Sprite').x += velocity;
+    var player = this.player.getComponent('Sprite');
+    player.x += velocity;
+
+    if (player.x < MIN_X) {
+      player.x = MIN_X;
+    } else if (player.x > MAX_X) {
+      player.x = MAX_X;
+    }
   };
 
   Game.PlayerControl = PlayerControl;
