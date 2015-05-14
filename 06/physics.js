@@ -72,7 +72,6 @@
       } else if (entity.hasComponent('Enemy')) {
         for (var j = 0, len2 = collisions.length; j < len2; j++) {
           var other = collisions[j];
-          console.log(other);
           if (!other.hasComponent('Player')) {
             continue;
           }
