@@ -3,10 +3,11 @@
       BehaviorSystem = Psykick2D.BehaviorSystem,
       CollisionGrid = Psykick2D.DataStructures.CollisionGrid;
 
-  var Physics = function(layer) {
+  var Physics = function(layer, enemyAI) {
     BehaviorSystem.call(this);
     this.requiredComponents = ['Sprite'];
     this.layer = layer;
+    this.enemyAI = enemyAI;
     this.grid = new CollisionGrid({
       width: 400,
       height: 500,
@@ -68,6 +69,17 @@
 
         var bullet = entity.getComponent('Sprite');
         bullet.newY = -bullet.height;
+      } else if (entity.hasComponent('Enemy')) {
+        for (var j = 0, len2 = collisions.length; j < len2; j++) {
+          var other = collisions[j];
+          console.log(other);
+          if (!other.hasComponent('Player')) {
+            continue;
+          }
+
+          this.layer.removeEntity(other);
+          this.enemyAI.moveDown = false; // Make the aliens hover after killing you
+        }
       }
     }
   };

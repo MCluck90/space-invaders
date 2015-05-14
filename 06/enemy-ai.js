@@ -10,6 +10,7 @@
     this.requiredComponents = ['Enemy', 'Sprite'];
     this.speed = 30;
     this.direction = 1;
+    this.moveDown = true;
   };
 
   Helper.inherit(EnemyAI, BehaviorSystem);
@@ -50,14 +51,16 @@
     if (minX <= MIN_X || maxX >= MAX_X) {
       // Flip the direction and speed up
       this.direction = this.direction * -1;
-      this.speed += 1;
+      if (this.moveDown) {
+        this.speed += 1;
 
-      for (var i = 0, len = this.actionOrder.length; i < len; i++) {
-        var enemy = this.actionOrder[i],
-            sprite = enemy.getComponent('Sprite');
+        for (var i = 0, len = this.actionOrder.length; i < len; i++) {
+          var enemy = this.actionOrder[i],
+              sprite = enemy.getComponent('Sprite');
 
-        // Move the enemies closer to the player
-        sprite.newY = sprite.y + (sprite.height / 2);
+          // Move the enemies closer to the player
+          sprite.newY = sprite.y + (sprite.height / 2);
+        }
       }
     }
   };

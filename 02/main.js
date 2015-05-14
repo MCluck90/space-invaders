@@ -27,7 +27,7 @@ var mainLayer = World.createLayer(),
     animationSystem = new AnimateSystem();
 
 // Create the player and some enemies
-var player = Factory.createPlayer(186, 480),
+var player = Factory.createPlayer(210, 430),
     orange = Factory.createOrangeEnemy(20, 20),
     purple = Factory.createPurpleEnemy(100, 20),
     blue   = Factory.createBlueEnemy(180, 20),

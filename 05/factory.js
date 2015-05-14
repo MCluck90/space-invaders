@@ -56,6 +56,10 @@ Game.Factory = {
           y: y,
           width: 64,
           height: 29,
+          pivot: {
+            x: 64,
+            y: 29
+          },
           rotation: degToRad(270)
         }),
         animation = new Animation({
