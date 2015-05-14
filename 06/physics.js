@@ -67,7 +67,7 @@
         }
 
         var bullet = entity.getComponent('Sprite');
-        bullet.y = -bullet.height;
+        bullet.newY = -bullet.height;
       }
     }
   };

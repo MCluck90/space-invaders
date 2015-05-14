@@ -3,6 +3,7 @@
 var World = Psykick2D.World,
     Factory = Game.Factory,
     SpriteSystem = Psykick2D.Systems.Render.Sprite,
+    AnimateSystem = Psykick2D.Systems.Behavior.Animate,
     PlayerControl = Game.PlayerControl,
     EnemyAI = Game.EnemyAI;
 
@@ -23,43 +24,51 @@ World.init({
   }
 });
 
-var mainLayer = World.createLayer();
-
-// Setup the systems
-var spriteSystem = new SpriteSystem(),
-    controlSystem = new PlayerControl(),
+// Create a layer and a way to draw sprites
+var mainLayer = World.createLayer(),
+    spriteSystem = new SpriteSystem();
+    animationSystem = new AnimateSystem(),
+    controls = new PlayerControl(),
     enemyAI = new EnemyAI();
 
-// Generate the game objects
+// Create the player and some enemies
 var player = Factory.createPlayer(186, 480),
-    bullet = Factory.createBullet(186, -20),
-    enemy1 = Factory.createOrangeEnemy(20, 20),
-    enemy2 = Factory.createPurpleEnemy(100, 20),
-    enemy3 = Factory.createBlueEnemy(180, 20),
-    enemy4 = Factory.createYellowEnemy(260, 20);
+    orange = Factory.createOrangeEnemy(20, 20),
+    purple = Factory.createPurpleEnemy(100, 20),
+    blue   = Factory.createBlueEnemy(180, 20),
+    yellow = Factory.createYellowEnemy(260, 20),
+    bullet = Factory.createBullet(186, -20);
 
-// Give the player some controls
-controlSystem.player = player;
-controlSystem.bullet = bullet;
+// Prepare to draw everything
+spriteSystem.addEntity(player);
+spriteSystem.addEntity(orange);
+spriteSystem.addEntity(purple);
+spriteSystem.addEntity(blue);
+spriteSystem.addEntity(yellow);
+spriteSystem.addEntity(bullet);
+
+// Setup the animations
+animationSystem.addEntity(player);
+animationSystem.addEntity(orange);
+animationSystem.addEntity(purple);
+animationSystem.addEntity(blue);
+animationSystem.addEntity(yellow);
+
+// Attach the player to the controls
+controls.player = player;
+controls.bullet = bullet;
 
 // Add the enemies to the AI system
-enemyAI.addEntity(enemy1);
-enemyAI.addEntity(enemy2);
-enemyAI.addEntity(enemy3);
-enemyAI.addEntity(enemy4);
+enemyAI.addEntity(orange);
+enemyAI.addEntity(purple);
+enemyAI.addEntity(blue);
+enemyAI.addEntity(yellow);
 
-// Add the sprites to the drawing system
-spriteSystem.addEntity(player);
-spriteSystem.addEntity(bullet);
-spriteSystem.addEntity(enemy1);
-spriteSystem.addEntity(enemy2);
-spriteSystem.addEntity(enemy3);
-spriteSystem.addEntity(enemy4);
-
-// Add all of the systems to the layer
-mainLayer.addSystem(controlSystem);
-mainLayer.addSystem(enemyAI);
+// Add the systems so they'll run
 mainLayer.addSystem(spriteSystem);
+mainLayer.addSystem(animationSystem);
+mainLayer.addSystem(controls);
+mainLayer.addSystem(enemyAI);
 
 // Add the layer to the world to start running it
 World.pushLayer(mainLayer);

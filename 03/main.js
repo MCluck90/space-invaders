@@ -3,6 +3,7 @@
 var World = Psykick2D.World,
     Factory = Game.Factory,
     SpriteSystem = Psykick2D.Systems.Render.Sprite,
+    AnimateSystem = Psykick2D.Systems.Behavior.Animate,
     PlayerControl = Game.PlayerControl;
 
 // Initialize the world
@@ -21,25 +22,40 @@ World.init({
   }
 });
 
-var mainLayer = World.createLayer();
+// Create a layer and a way to draw sprites
+var mainLayer = World.createLayer(),
+    spriteSystem = new SpriteSystem();
+    animationSystem = new AnimateSystem(),
+    controls = new PlayerControl();
 
-var spriteSystem = new SpriteSystem(),
-    controlSystem = new PlayerControl();
+// Create the player and some enemies
+var player = Factory.createPlayer(186, 480),
+    orange = Factory.createOrangeEnemy(20, 20),
+    purple = Factory.createPurpleEnemy(100, 20),
+    blue   = Factory.createBlueEnemy(180, 20),
+    yellow = Factory.createYellowEnemy(260, 20);
 
-// Give the player some controls and draw them
-var player = Factory.createPlayer(186, 480);
-controlSystem.player = player;
+// Prepare to draw everything
 spriteSystem.addEntity(player);
+spriteSystem.addEntity(orange);
+spriteSystem.addEntity(purple);
+spriteSystem.addEntity(blue);
+spriteSystem.addEntity(yellow);
 
-// Add some enemies to the screen
-spriteSystem.addEntity(Factory.createOrangeEnemy(20, 20));
-spriteSystem.addEntity(Factory.createPurpleEnemy(100, 20));
-spriteSystem.addEntity(Factory.createBlueEnemy(180, 20));
-spriteSystem.addEntity(Factory.createYellowEnemy(260, 20));
+// Setup the animations
+animationSystem.addEntity(player);
+animationSystem.addEntity(orange);
+animationSystem.addEntity(purple);
+animationSystem.addEntity(blue);
+animationSystem.addEntity(yellow);
 
-// Add all of the systems to the layer
-mainLayer.addSystem(controlSystem);
+// Attach the player to the controls
+controls.player = player;
+
+// Add the systems so they'll run
 mainLayer.addSystem(spriteSystem);
+mainLayer.addSystem(animationSystem);
+mainLayer.addSystem(controls);
 
 // Add the layer to the world to start running it
 World.pushLayer(mainLayer);
