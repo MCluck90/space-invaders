@@ -37,7 +37,7 @@ var player = Factory.createPlayer(210, 430),
     purple = Factory.createPurpleEnemy(100, 20),
     blue   = Factory.createBlueEnemy(180, 20),
     yellow = Factory.createYellowEnemy(260, 20),
-    bullet = Factory.createBullet(186, -20);
+    bullet = Factory.createBullet(0, -20);
 
 // Prepare to draw everything
 spriteSystem.addEntity(player);

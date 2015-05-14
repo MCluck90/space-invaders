@@ -49,8 +49,8 @@
 
     // Shoot a bullet
     if (bullet.y <= -bullet.height && Keyboard.isKeyDown(Keys.Space)) {
-      bullet.newX = player.newX + (player.height / 2) - (bullet.width / 2);
-      bullet.newY = player.y - player.width;
+      bullet.newX = player.newX - 18;
+      bullet.newY = player.y;
     } else if (bullet.y > -bullet.height) {
       bullet.newY -= BULLET_SPEED * delta;
     }
